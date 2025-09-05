@@ -445,6 +445,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hostButton: {fileID: 1177400708}
   clientButton: {fileID: 1155190365}
+  text: {fileID: 106088627}
 --- !u!4 &542812197
 Transform:
   m_ObjectHideFlags: 0

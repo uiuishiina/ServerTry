@@ -5,6 +5,7 @@ public class Ui_Manager : MonoBehaviour
 {
     [SerializeField] private Button hostButton;
     [SerializeField] private Button clientButton;
+    [SerializeField] private Text text;
     private void Awake()
     {
         hostButton.onClick.AddListener(() =>
@@ -15,5 +16,10 @@ public class Ui_Manager : MonoBehaviour
         {
             NetworkManager.Singleton.StartClient();
         });
+    }
+
+    public void Set(ulong id)
+    {
+        text.text = id.ToString();
     }
 }
