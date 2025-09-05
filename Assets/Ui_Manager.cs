@@ -11,10 +11,12 @@ public class Ui_Manager : MonoBehaviour
         hostButton.onClick.AddListener(() =>
         {
             NetworkManager.Singleton.StartServer();
+            text.text = "Server";
         });
         clientButton.onClick.AddListener(() =>
         {
             NetworkManager.Singleton.StartClient();
+            text.text = "Client";
         });
     }
 
