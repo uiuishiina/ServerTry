@@ -1,9 +1,19 @@
 ﻿using UnityEngine;
 using Unity.Netcode;
+using UnityEngine.Networking;
+using Unity.Networking.Transport;
 
+public class Manager : NetworkManager
+{
+    public void OnServerConnect(NetworkConnection conn)
+    {
+        Debug.Log("OnPlayerConnected");
+    }
+}
 public class Server : NetworkBehaviour
 {
-    [SerializeField] private GameObject[] player = null;
+    [SerializeField] private GameObject Servermain = null;
+    private GameObject NetObject = null;
     public override void OnNetworkSpawn()
     {
         if (NetworkManager.Singleton != null && NetworkManager.Singleton.IsClient)
@@ -19,7 +29,7 @@ public class Server : NetworkBehaviour
         if (IsServer)
         {
             // ホスト(サーバー)側
-            var NetObject = Instantiate(player[0], transform.position, Quaternion.identity);
+            NetObject = Instantiate(Servermain, transform.position, Quaternion.identity);
             NetObject.GetComponent<NetworkObject>().Spawn(true);
             Debug.Log("生成");
             Debug.Log("IsServer");
@@ -28,6 +38,12 @@ public class Server : NetworkBehaviour
         // Prefabのオーナー判定
         if (IsClient)
         {
+            /*[Rpc(SendTo.Server)]
+            void PingRpc(int pingCount)
+            { 
+            
+            }*/
+
             // クライアントがホスト(サーバー)に接続する度に、
             // Prefabが生成されOnNetworkSpawnが実行されるので、
             // オーナーのPrefabオブジェクトのみカメラを移動させるようにしている
